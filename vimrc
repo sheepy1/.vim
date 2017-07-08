@@ -53,6 +53,9 @@ set clipboard=unnamed
 " Close compatible mode
 set nocompatible
 
+" Show command
+set showcmd
+
 " Sets how many lines of history VIM has to remember
 set history=500
 

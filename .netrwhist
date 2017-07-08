@@ -1,2 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =0
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/Users/Sheepy/zhixingche-iOS/Carthage'
+let g:netrw_dirhist_2='/Users/Sheepy/haskell_src'
+let g:netrw_dirhist_3='/Users/Sheepy/.vim'
+let g:netrw_dirhist_4='/Users/Sheepy/stock_analysis'
+let g:netrw_dirhist_5='/Users/Sheepy/stock_analysis/src'
+let g:netrw_dirhist_6='/Users/Sheepy/.vim/pack'
+let g:netrw_dirhist_7='/Users/Sheepy/fe/dafengche-qiwa-freyr'
+let g:netrw_dirhist_8='/Users/Sheepy/fe/dafengche-qiwa-freyr/src'
+let g:netrw_dirhist_9='/Users/Sheepy/fe/dafengche-qiwa-freyr/src/routes'

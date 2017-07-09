@@ -1,32 +1,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Notes:
-"       This file has been edited by Sheepy to add many customized settings.
-"       So don't pull from original git repo!
-"
-" Maintainer: 
-"       Amir Salihefendic
-"       http://amix.dk - amix@amix.dk
-"
-" Version: 
-"       6.0 - 01/04/17 14:24:34 
-"
-" Blog_post: 
-"       http://amix.dk/blog/post/19691#The-ultimate-Vim-configuration-on-Github
-"
-" Awesome_version:
-"       Get this config, nice color schemes and lots of plugins!
-"
-"       Install the awesome version from:
-"
-"           https://github.com/amix/vimrc
-"
-" Syntax_highlighted:
-"       http://amix.dk/vim/vimrc.html
-"
-" Raw_version: 
-"       http://amix.dk/vim/vimrc.txt
-"
 " Sections:
+"    -> Plugins
 "    -> General
 "    -> VIM user interface
 "    -> Colors and Fonts
@@ -43,7 +17,82 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
+" Make sure you use single quotes
+
+" CtrlP
+Plug 'https://github.com/ctrlpvim/ctrlp.vim'
+
+" Emmet
+Plug 'https://github.com/mattn/emmet-vim'
+
+" Snippet
+" Track the engine.
+" Plug 'SirVer/ultisnips'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'honza/vim-snippets'
+
+" Comment
+Plug 'https://github.com/tpope/vim-commentary'
+
+" Surround(don't know why but it does not work)
+" Plug 'https://github.com/tpope/vim-surround'
+
+" Light line
+" Plug 'itchyny/lightline.vim'
+
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+" Plug 'junegunn/vim-easy-align'
+
+" Any valid git URL is allowed
+" Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+
+" Multiple Plug commands can be written in a single line using | separators
+" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
+" On-demand loading
+Plug 'scrooloose/nerdtree' " , { 'on':  'NERDTreeToggle' }
+" Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+
+" Using a non-master branch
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+
+" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+" Plug 'fatih/vim-go', { 'tag': '*' }
+
+" Plugin options
+" Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+
+" Plugin outside ~/.vim/plugged with post-update hook
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+" Unmanaged plugin (manually installed and updated)
+" Plug '~/my-prototype-plugin'
+
+" Initialize plugin system
+call plug#end()
+
+" NERDTree config
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+map <C-n> :NERDTreeToggle<CR>
+
+" Emmet config
+let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+  
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -55,6 +104,13 @@ set nocompatible
 
 " Show command
 set showcmd
+
+" Relative numbers
+set relativenumber
+set number
+
+" Treat vue file as html/javascript/css file
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
 " Sets how many lines of history VIM has to remember
 set history=500
@@ -73,6 +129,12 @@ let g:mapleader = " "
 
 " Fast saving
 nmap <leader>w :w!<cr>
+
+" Fast quit
+nmap <leader>q :q!<cr>
+
+" Save and quit
+nmap <leader>x :x!<cr>
 
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
@@ -106,7 +168,7 @@ endif
 set ruler
 
 " Height of the command bar
-set cmdheight=2
+" set cmdheight=2
 
 " A buffer becomes hidden when it is abandoned
 set hid
@@ -195,14 +257,30 @@ set nobackup
 set nowb
 set noswapfile
 
-" Search down into subfolders 
+" Search down into subfolders (Use CtrlP instead)
 " Provides tab-completion for all file-related tasks
 " So we can:
 " - Hit tab to :find <filename> by partial match
 " - Use * to make it fuzzy
 " - :b <filename> can autocomplete any open buffer 
-set path+=**
+" set path+=**
 
+" File browsing (Use NERDTree instead)
+" So we can:
+" - :edit a folder to open a file browser
+" - <CR>/v/t to open in an h-split/v-split/tab
+" - check |netrw-browse-maps| for more mappings
+" let g:netrw_banner=0            " disable annoying banner
+" let g:netrw_liststyle=3         " tree view
+" let g:netrw_browse_split=4      " open in prior window 
+" let g:netrw_altv=1              " open splits to the right
+" let g:netrw_winsize=25
+" let g:netrw_list_hide=netrw_gitignore#Hide()
+" let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+" augroup ProjectDrawer
+  " autocmd!
+  " autocmd VimEnter * :Vexplore
+" augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -281,8 +359,8 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers 
 try
-  set switchbuf=useopen,usetab,newtab
-  set stal=2
+set switchbuf=useopen,usetab,newtab
+set stal=2
 catch
 endtry
 
@@ -313,23 +391,23 @@ vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 if has("mac") || has("macunix")
-  nmap <D-j> <M-j>
-  nmap <D-k> <M-k>
-  vmap <D-j> <M-j>
-  vmap <D-k> <M-k>
+nmap <D-j> <M-j>
+nmap <D-k> <M-k>
+vmap <D-j> <M-j>
+vmap <D-k> <M-k>
 endif
 
 " Delete trailing white space on save, useful for some filetypes ;)
 fun! CleanExtraSpaces()
-    let save_cursor = getpos(".")
-    let old_query = getreg('/')
-    silent! %s/\s\+$//e
-    call setpos('.', save_cursor)
-    call setreg('/', old_query)
+let save_cursor = getpos(".")
+let old_query = getreg('/')
+silent! %s/\s\+$//e
+call setpos('.', save_cursor)
+call setreg('/', old_query)
 endfun
 
 if has("autocmd")
-    autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
+autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
 
 
@@ -353,10 +431,10 @@ map <leader>s? z=
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Quickly open a buffer for scribble
-map <leader>q :e ~/buffer<cr>
+map <leader>e :e ~/buffer<cr>
 
 " Quickly open a markdown buffer for scribble
-map <leader>x :e ~/buffer.md<cr>
+" map <leader>x :e ~/buffer.md<cr>
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>

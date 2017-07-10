@@ -1,6 +1,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sections:
 "    -> Plugins
+"    -> Insert mode mappings
 "    -> General
 "    -> VIM user interface
 "    -> Colors and Fonts
@@ -39,7 +40,6 @@ Plug 'https://github.com/mattn/emmet-vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
-" Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
 
 " Comment
@@ -112,6 +112,9 @@ set number
 " Treat vue file as html/javascript/css file
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
+" Format code
+nmap <leader>fm gg=G
+
 " Sets how many lines of history VIM has to remember
 set history=500
 
@@ -140,6 +143,22 @@ nmap <leader>x :x!<cr>
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Insert mode mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+inoremap ( ()<Esc>i
+inoremap (<CR> (<CR>)<Esc>ko 
+
+inoremap [ []<Esc>i
+inoremap [<CR> [<CR>]<Esc>ko 
+
+inoremap { {}<Esc>i
+inoremap {<CR> {<CR>}<Esc>ko 
+
+inoremap " ""<Esc>i
+inoremap ' ''<Esc>i
+
+inoremap <C-f> <Esc>la
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -196,9 +215,9 @@ set lazyredraw
 set magic
 
 " Show matching brackets when text indicator is over them
-set showmatch 
+" set showmatch 
 " How many tenths of a second to blink when matching brackets
-set mat=2
+" set mat=2
 
 " No annoying sound on errors
 set noerrorbells
@@ -407,7 +426,7 @@ call setreg('/', old_query)
 endfun
 
 if has("autocmd")
-autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
+autocmd BufWritePre *.txt,*.js,*.vue,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
 
 

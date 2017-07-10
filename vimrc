@@ -91,8 +91,8 @@ map <C-n> :NERDTreeToggle<CR>
 " Emmet config
 let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
-  
+autocmd FileType html,css,less EmmetInstall
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -109,11 +109,12 @@ set showcmd
 set relativenumber
 set number
 
-" Treat vue file as html/javascript/css file
-autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+" Treat vue file as html/javascript/css/less file
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css.less
 
-" Format code
-nmap <leader>fm gg=G
+" Format code(when save)
+" autocmd BufWritePre * :normal gg=G(not good)
+" nnoremap zz  gg=G
 
 " Sets how many lines of history VIM has to remember
 set history=500
@@ -147,18 +148,20 @@ command W w !sudo tee % > /dev/null
 " => Insert mode mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 inoremap ( ()<Esc>i
-inoremap (<CR> (<CR>)<Esc>ko 
+inoremap (<CR> (<CR>)<Esc>ko
 
 inoremap [ []<Esc>i
-inoremap [<CR> [<CR>]<Esc>ko 
+inoremap [<CR> [<CR>]<Esc>ko
 
 inoremap { {}<Esc>i
-inoremap {<CR> {<CR>}<Esc>ko 
+inoremap {<CR> {<CR>}<Esc>ko
 
 inoremap " ""<Esc>i
 inoremap ' ''<Esc>i
 
 inoremap <C-f> <Esc>la
+inoremap <C-a> <Esc>^i
+inoremap <C-e> <Esc>$i
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -297,8 +300,8 @@ set noswapfile
 " let g:netrw_list_hide=netrw_gitignore#Hide()
 " let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 " augroup ProjectDrawer
-  " autocmd!
-  " autocmd VimEnter * :Vexplore
+" autocmd!
+" autocmd VimEnter * :Vexplore
 " augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -317,9 +320,9 @@ set tabstop=4
 set lbr
 set tw=500
 
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
+set ai " Auto indent
+set si " Smart indent
+set wrap " Wrap lines
 
 
 """"""""""""""""""""""""""""""
@@ -378,8 +381,8 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers 
 try
-set switchbuf=useopen,usetab,newtab
-set stal=2
+    set switchbuf=useopen,usetab,newtab
+    set stal=2
 catch
 endtry
 
@@ -410,23 +413,23 @@ vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 if has("mac") || has("macunix")
-nmap <D-j> <M-j>
-nmap <D-k> <M-k>
-vmap <D-j> <M-j>
-vmap <D-k> <M-k>
+    nmap <D-j> <M-j>
+    nmap <D-k> <M-k>
+    vmap <D-j> <M-j>
+    vmap <D-k> <M-k>
 endif
 
 " Delete trailing white space on save, useful for some filetypes ;)
 fun! CleanExtraSpaces()
-let save_cursor = getpos(".")
-let old_query = getreg('/')
-silent! %s/\s\+$//e
-call setpos('.', save_cursor)
-call setreg('/', old_query)
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    silent! %s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
 endfun
 
 if has("autocmd")
-autocmd BufWritePre *.txt,*.js,*.vue,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
+    autocmd BufWritePre *.txt,*.js,*.vue,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
 
 
@@ -473,20 +476,20 @@ endfunction
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
 function! <SID>BufcloseCloseIt()
-   let l:currentBufNum = bufnr("%")
-   let l:alternateBufNum = bufnr("#")
+    let l:currentBufNum = bufnr("%")
+    let l:alternateBufNum = bufnr("#")
 
-   if buflisted(l:alternateBufNum)
-     buffer #
-   else
-     bnext
-   endif
+    if buflisted(l:alternateBufNum)
+        buffer #
+    else
+        bnext
+    endif
 
-   if bufnr("%") == l:currentBufNum
-     new
-   endif
+    if bufnr("%") == l:currentBufNum
+        new
+    endif
 
-   if buflisted(l:currentBufNum)
-     execute("bdelete! ".l:currentBufNum)
-   endif
+    if buflisted(l:currentBufNum)
+        execute("bdelete! ".l:currentBufNum)
+    endif
 endfunction

@@ -45,11 +45,21 @@ Plug 'honza/vim-snippets'
 " Comment
 Plug 'https://github.com/tpope/vim-commentary'
 
-" Surround(don't know why but it does not work)
-" Plug 'https://github.com/tpope/vim-surround'
+" Completion
+Plug 'Valloric/YouCompleteMe'
+
+" Less highlight
+" Plug 'groenewege/vim-less'
+
+" Surround(cs'" to change 'hello' to "hello", cst" to change <div>hello</div> to "hello")
+Plug 'tpope/vim-surround'
 
 " Light line
-" Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
+
+" Indent file with .editorconfig
+" Plug 'maksimr/vim-jsbeautify'
+" map <c-f> :call JsBeautify()<cr>
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 " Plug 'junegunn/vim-easy-align'
@@ -91,7 +101,10 @@ map <C-n> :NERDTreeToggle<CR>
 " Emmet config
 let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_install_global = 0
-autocmd FileType html,css,less EmmetInstall
+autocmd FileType html,less EmmetInstall
+
+" Completion
+" set omnifunc=syntaxcomplete#Complete
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -109,12 +122,11 @@ set showcmd
 set relativenumber
 set number
 
-" Treat vue file as html/javascript/css/less file
-autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css.less
+" Treat vue file as html/javascript/less file
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.less
 
-" Format code(when save)
-" autocmd BufWritePre * :normal gg=G(not good)
-" nnoremap zz  gg=G
+" Indent before saving
+" autocmd BufWritePre * :normal gg=G
 
 " Sets how many lines of history VIM has to remember
 set history=500
@@ -140,7 +152,7 @@ nmap <leader>q :q!<cr>
 " Save and quit
 nmap <leader>x :x!<cr>
 
-" :W sudo saves the file 
+" :W sudo saves the file
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
 
@@ -148,16 +160,16 @@ command W w !sudo tee % > /dev/null
 " => Insert mode mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 inoremap ( ()<Esc>i
-inoremap (<CR> (<CR>)<Esc>ko
+" inoremap (<CR> (<CR>)<Esc>ko
 
 inoremap [ []<Esc>i
-inoremap [<CR> [<CR>]<Esc>ko
+" inoremap [<CR> [<CR>]<Esc>ko
 
 inoremap { {}<Esc>i
 inoremap {<CR> {<CR>}<Esc>ko
 
-inoremap " ""<Esc>i
-inoremap ' ''<Esc>i
+" inoremap " ""<Esc>i
+" inoremap ' ''<Esc>i
 
 inoremap <C-f> <Esc>la
 inoremap <C-a> <Esc>^i
@@ -170,7 +182,7 @@ inoremap <C-e> <Esc>$i
 set so=7
 
 " Avoid garbled characters in Chinese language windows OS
-let $LANG='en' 
+let $LANG='en'
 set langmenu=en
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
@@ -202,23 +214,23 @@ set whichwrap+=<,>,h,l
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
 set hlsearch
 
 " Makes search act like search in modern browsers
-set incsearch 
+set incsearch
 
 " Don't redraw while executing macros (good performance config)
-set lazyredraw 
+set lazyredraw
 
 " For regular expressions turn magic on
 set magic
 
 " Show matching brackets when text indicator is over them
-" set showmatch 
+" set showmatch
 " How many tenths of a second to blink when matching brackets
 " set mat=2
 
@@ -242,7 +254,7 @@ set foldcolumn=1
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
-syntax enable 
+syntax enable
 
 " Enable 256 colors palette in Gnome Terminal
 if $COLORTERM == 'gnome-terminal'
@@ -284,7 +296,7 @@ set noswapfile
 " So we can:
 " - Hit tab to :find <filename> by partial match
 " - Use * to make it fuzzy
-" - :b <filename> can autocomplete any open buffer 
+" - :b <filename> can autocomplete any open buffer
 " set path+=**
 
 " File browsing (Use NERDTree instead)
@@ -294,7 +306,7 @@ set noswapfile
 " - check |netrw-browse-maps| for more mappings
 " let g:netrw_banner=0            " disable annoying banner
 " let g:netrw_liststyle=3         " tree view
-" let g:netrw_browse_split=4      " open in prior window 
+" let g:netrw_browse_split=4      " open in prior window
 " let g:netrw_altv=1              " open splits to the right
 " let g:netrw_winsize=25
 " let g:netrw_list_hide=netrw_gitignore#Hide()
@@ -363,8 +375,8 @@ map <leader>h :bprevious<cr>
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
-map <leader>t<leader> :tabnext 
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext
 
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
@@ -379,7 +391,7 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" Specify the behavior when switching between buffers 
+" Specify the behavior when switching between buffers
 try
     set switchbuf=useopen,usetab,newtab
     set stal=2
@@ -429,7 +441,7 @@ fun! CleanExtraSpaces()
 endfun
 
 if has("autocmd")
-    autocmd BufWritePre *.txt,*.js,*.vue,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
+    autocmd BufWritePre * :call CleanExtraSpaces()
 endif
 
 

@@ -37,9 +37,7 @@ Plug 'https://github.com/mattn/emmet-vim'
 " Snippet
 " Track the engine.
 " Plug 'SirVer/ultisnips'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'garbas/vim-snipmate'
+Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Comment
@@ -56,6 +54,9 @@ Plug 'tpope/vim-surround'
 
 " Light line
 Plug 'itchyny/lightline.vim'
+
+" Solve the css's indent problem in html file
+Plug 'othree/html5.vim'
 
 " Indent file with .editorconfig
 " Plug 'maksimr/vim-jsbeautify'
@@ -99,9 +100,18 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 map <C-n> :NERDTreeToggle<CR>
 
 " Emmet config
-let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_leader_key = '<Tab>'
+" let g:user_emmet_mode = 'n'
 let g:user_emmet_install_global = 0
 autocmd FileType html,less EmmetInstall
+
+" Completion & Snippet config
+let g:ycm_key_list_select_completion = ['<C-n>', '<Tab>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<S-Tab>']
+let g:SuperTabDefaultCompletionType = ['<C-n>', '<Tab>']
+let g:UltiSnipsExpandTrigger = '<CR>'
+let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
 " Completion
 " set omnifunc=syntaxcomplete#Complete
@@ -123,7 +133,7 @@ set relativenumber
 set number
 
 " Treat vue file as html/javascript/less file
-autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.less
+autocmd BufRead,BufNewFile *.vue setlocal filetype=html
 
 " Indent before saving
 " autocmd BufWritePre * :normal gg=G
@@ -182,7 +192,7 @@ inoremap <C-e> <Esc>$i
 set so=7
 
 " Avoid garbled characters in Chinese language windows OS
-let $LANG='en'
+let $LANG = 'en'
 set langmenu=en
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim

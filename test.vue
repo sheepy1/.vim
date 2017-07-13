@@ -1,28 +1,31 @@
 <template>
     <div>
         <div class="hello">
-            {{ shshsh }}
+            {{ hello }}
         </div>
         <div class="hello"></div>
         <div class="hello"></div>
     </div>
 </template>
-
 <script>
 import heh from 'heheh';
 export default{
     data() {
         return {
+            key: value,
+            key2: value
+        };
+    }
+    data() {
+        return {
             person: { name: 'Sheepy' }
         };
     },
-
     computed: {
         personName() {
             return this.person.name;
         }
-    }
-
+    },
     methods: {
         fetch() {
             return this.get();
@@ -38,5 +41,4 @@ export default{
         height: 66px;
     }
 </style>
-
 

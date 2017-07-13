@@ -1,12 +1,12 @@
 function test() {
-    console.log("just test js filetype's highlight");
+    console.log("[just test js filetype's highlight]");
 }
 
 test();
 
 class Test {
     run() {
-        console.log('run');
+        console.log('"run"');
     }
 }
 

@@ -31,17 +31,18 @@ call plug#begin('~/.vim/plugged')
 " CtrlP
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 
+" Search across files
+Plug 'mileszs/ack.vim'
+
 " Emmet
 Plug 'https://github.com/mattn/emmet-vim'
 
 " Snippet
-" Track the engine.
-" Plug 'SirVer/ultisnips'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Comment
-Plug 'https://github.com/tpope/vim-commentary'
+Plug 'tomtom/tcomment_vim'
 
 " Completion
 Plug 'Valloric/YouCompleteMe'
@@ -93,6 +94,10 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 " Initialize plugin system
 call plug#end()
 
+" Ack config
+let g:ackprg = "ag --vimgrep --smart-case"
+cnoreabbrev Ack Ack!
+
 " NERDTree config
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -100,18 +105,18 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 map <C-n> :NERDTreeToggle<CR>
 
 " Emmet config
-let g:user_emmet_leader_key = '<Tab>'
+let g:user_emmet_leader_key = ','
 " let g:user_emmet_mode = 'n'
-let g:user_emmet_install_global = 0
-autocmd FileType html,less EmmetInstall
+" let g:user_emmet_install_global = 0
+" autocmd FileType html,javascript,less EmmetInstall
 
 " Completion & Snippet config
-let g:ycm_key_list_select_completion = ['<C-n>', '<Tab>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<S-Tab>']
-let g:SuperTabDefaultCompletionType = ['<C-n>', '<Tab>']
-let g:UltiSnipsExpandTrigger = '<CR>'
-let g:UltiSnipsJumpForwardTrigger = '<C-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+let g:ycm_key_list_select_completion = ['<C-n>']
+let g:ycm_key_list_previous_completion = ['<C-p>']
+let g:SuperTabDefaultCompletionType = ['<C-n>']
+let g:UltiSnipsExpandTrigger = '<Tab>'
+let g:UltiSnipsJumpForwardTrigger = '<Tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
 
 " Completion
 " set omnifunc=syntaxcomplete#Complete
@@ -133,7 +138,7 @@ set relativenumber
 set number
 
 " Treat vue file as html/javascript/less file
-autocmd BufRead,BufNewFile *.vue setlocal filetype=html
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css.less
 
 " Indent before saving
 " autocmd BufWritePre * :normal gg=G
@@ -184,6 +189,15 @@ inoremap {<CR> {<CR>}<Esc>ko
 inoremap <C-f> <Esc>la
 inoremap <C-a> <Esc>^i
 inoremap <C-e> <Esc>$i
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Parenthesis/bracket
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vnoremap a( <esc>`>a)<esc>`<i(<esc>
+vnoremap a[ <esc>`>a]<esc>`<i[<esc>
+vnoremap a{ <esc>`>a}<esc>`<i{<esc>
+vnoremap a" <esc>`>a"<esc>`<i"<esc>
+vnoremap a' <esc>`>a'<esc>`<i'<esc>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface

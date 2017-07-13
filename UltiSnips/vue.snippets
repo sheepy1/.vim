@@ -1,0 +1,34 @@
+snippet vue "vue base" w
+<template>
+	<div id="root">
+		${0:${VISUAL}}
+	</div>
+</template>
+
+<script>
+	export default {
+
+	};
+</script>
+
+<style lang="less" scoped>
+
+</style>
+endsnippet
+
+snippet vd "vue data" w
+data() {
+	return {
+		${0:${VISUAL}}
+	};
+}
+endsnippet
+
+snippet vc "vue computed" b
+computed: {
+	${1:name}() {
+		${2: #body}
+	}
+}
+endsnippet
+

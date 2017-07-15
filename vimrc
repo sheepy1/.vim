@@ -47,6 +47,12 @@ Plug 'tomtom/tcomment_vim'
 " Completion
 Plug 'Valloric/YouCompleteMe'
 
+" Color Scheme
+Plug 'altercation/vim-colors-solarized'
+
+" Translate(Has some problems, maybe I could write one by myself.)
+" Plug 'https://github.com/vim-scripts/TranslateEnToCn'
+
 " Less highlight
 " Plug 'groenewege/vim-less'
 
@@ -77,7 +83,7 @@ Plug 'scrooloose/nerdtree' " , { 'on':  'NERDTreeToggle' }
 " Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 " Using a non-master branch
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' } " Generate config file for YCM
 
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
 " Plug 'fatih/vim-go', { 'tag': '*' }
@@ -114,6 +120,7 @@ let g:user_emmet_leader_key = ','
 let g:ycm_key_list_select_completion = ['<C-n>']
 let g:ycm_key_list_previous_completion = ['<C-p>']
 let g:SuperTabDefaultCompletionType = ['<C-n>']
+
 let g:UltiSnipsExpandTrigger = '<Tab>'
 let g:UltiSnipsJumpForwardTrigger = '<Tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
@@ -174,21 +181,28 @@ command W w !sudo tee % > /dev/null
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Insert mode mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-inoremap ( ()<Esc>i
+" inoremap ( ()<Esc>i
 " inoremap (<CR> (<CR>)<Esc>ko
 
-inoremap [ []<Esc>i
+" inoremap [ []<Esc>i
 " inoremap [<CR> [<CR>]<Esc>ko
 
-inoremap { {}<Esc>i
-inoremap {<CR> {<CR>}<Esc>ko
+" inoremap { {}<Esc>i
+" inoremap {<CR> {<CR>}<Esc>ko
 
 " inoremap " ""<Esc>i
 " inoremap ' ''<Esc>i
 
 inoremap <C-f> <Esc>la
 inoremap <C-a> <Esc>^i
-inoremap <C-e> <Esc>$i
+inoremap <C-e> <Esc>$a
+
+cnoremap <C-f> <Right>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-d> <Del>
+cnoremap <C-n> <Down>
+cnoremap <C-p> <Up>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Parenthesis/bracket
@@ -281,15 +295,15 @@ set foldcolumn=1
 syntax enable
 
 " Enable 256 colors palette in Gnome Terminal
-if $COLORTERM == 'gnome-terminal'
-    set t_Co=256
-endif
+ " if $COLORTERM == 'gnome-terminal'
+ set t_Co=256
+ " endif
 
-try
-    colorscheme desert
-catch
-endtry
+colorscheme solarized
+" 16 || 256
+let g:solarized_termcolors = 256
 
+" for solarized, dark and light is total different.
 set background=dark
 
 " Set extra options when running in GUI mode

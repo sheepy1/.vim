@@ -42,3 +42,28 @@ export default{
     }
 </style>
 
+<template>
+    <div id="root">
+    </div>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                this.hello
+            };
+        },
+
+        computed: {
+            hello() {
+                return 'world';
+            }
+        }
+
+    };
+</script>
+
+<style lang="less" scoped>
+
+</style>

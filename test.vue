@@ -46,12 +46,12 @@ export default{
     <div id="root">
     </div>
 </template>
-
 <script>
     export default {
         data() {
             return {
-                this.hello
+                `pre${mid}pos`
+                `pre${mid}pos`
             };
         },
 

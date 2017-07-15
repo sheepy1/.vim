@@ -182,13 +182,13 @@ command W w !sudo tee % > /dev/null
 " => Insert mode mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " inoremap ( ()<Esc>i
-" inoremap (<CR> (<CR>)<Esc>ko
+" inoremap (<CR> (<CR>)<Esc>==ko
 
 " inoremap [ []<Esc>i
-" inoremap [<CR> [<CR>]<Esc>ko
+" inoremap [<CR> [<CR>]<Esc>==ko
 
 " inoremap { {}<Esc>i
-" inoremap {<CR> {<CR>}<Esc>ko
+inoremap {<CR> {<CR>}<Esc>ko
 
 " inoremap " ""<Esc>i
 " inoremap ' ''<Esc>i
@@ -196,6 +196,7 @@ command W w !sudo tee % > /dev/null
 inoremap <C-f> <Esc>la
 inoremap <C-a> <Esc>^i
 inoremap <C-e> <Esc>$a
+inoremap <C-d> <Esc>lxa
 
 cnoremap <C-f> <Right>
 cnoremap <C-a> <Home>

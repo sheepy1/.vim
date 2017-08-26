@@ -3,33 +3,39 @@
         <div class="hello">
             {{ hello }}
         </div>
+        <div class="hello">{{ hello }}</div>
         <div class="hello"></div>
-        <div class="hello"></div>
+        <img src="">
+
     </div>
 </template>
 <script>
-import heh from 'heheh';
+    import heh from 'heheh';
 export default{
     data() {
         return {
             key: value,
             key2: value
         };
-    }
+    },
     data() {
         return {
             person: { name: 'Sheepy' }
         };
     },
+
     computed: {
+
+    },
+
+    methods: {
         personName() {
             return this.person.name;
-        }
-    },
-    methods: {
+        },
         fetch() {
             return this.get();
         }
+
     }
 
 };
@@ -67,3 +73,4 @@ export default{
 <style lang="less" scoped>
 
 </style>
+

@@ -1,0 +1,25 @@
+set ignorecase
+set smartcase
+set hlsearch
+set clipboard=unnamed
+set gdefault
+set relativenumber
+set number
+
+nmap <space><cr> :nohl<cr>
+nmap <space>w :w!<cr>
+nmap <C-o> <C-t>
+nmap <C-i> :njump<cr>
+nmap <space>d :xhelp<cr>
+
+nmap <space>b :xcmenucmd Add Breakpoint At Current Line<cr>
+map gc :xcmenucmd Comment Selection<cr>
+" nmap gs viw:xccmd findSelectedTextInWorkspace<cr>
+map gs :xcmenucmd Find Selected Text in Workspace<cr>
+nmap <C-j> :xcmenucmd Show Debug Area<cr>
+nmap <C-h> :xcmenucmd Show Navigator<cr>
+nmap <C-l> :xcmenucmd Show Utilities<cr>
+" prefer to use xcmenucmd instead, but sometimes it does not work
+nmap <space>o :xccmd openQuickly<cr>
+nmap <space>c :xccmd toggleTokenizedEditing<cr>
+

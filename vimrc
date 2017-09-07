@@ -48,7 +48,7 @@ colorscheme solarized
 " 16 || 256
 let g:solarized_termcolors = 256
 
-" for solarized, dark and light is total different.
+" for solarized, dark and light is totally different.
 set background=dark
 
 " Set extra options when running in GUI mode

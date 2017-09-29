@@ -17,3 +17,6 @@ function snippetFunc()'` {
     console.log('hello');
 }
 
+function heheh() {
+    let array = new Array();
+}

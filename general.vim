@@ -112,18 +112,27 @@ vnoremap ` <Esc>`>a`<Esc>`<i`<Esc>
 " => Auto command
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Open markdown files with Chrome.
-autocmd BufEnter *.md exe 'nnoremap <leader>p :!open -a "MacDown.app" "%"<CR><CR>'
+autocmd BufEnter *.md exe 'nnoremap <leader>r :!open -a "MacDown.app" "%"<CR><CR>'
+
+
+autocmd BufEnter *.html exe 'nnoremap <leader>r :!open "%"<CR><CR>'
 
 " Run python script
-au BufEnter *.py exe 'nnoremap <leader>r :call SaveAndRun()<cr>'
-function SaveAndRun()
+au BufEnter *.py exe 'nnoremap <leader>r :call RunPython()<cr>'
+function RunPython()
     :w! | !python3 "%"
 endfunction
 
+au BufEnter *.js exe 'nnoremap <leader>r :call RunJavaScript()<cr>'
+function RunJavaScript()
+    :w! | !node "%"
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Search in VISUAL
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 vnoremap gd y:/<C-R>"<CR>
 vnoremap gs y:Ack! <C-R>"<CR>
+
+
 

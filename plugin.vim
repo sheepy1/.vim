@@ -96,7 +96,9 @@ Plug 'scrooloose/nerdtree' " , { 'on':  'NERDTreeToggle' }
 call plug#end()
 
 " Google config
-let g:vim_g_query_url = "http://google.com/search?q="
+" Use :Google in v/n mode
+" Use :Googlef to search with file type
+" let g:vim_g_query_url = "http://google.com/search?q="
 
 " Youdao config
 vnoremap <silent> <C-T> :<C-u>Ydv<CR>
@@ -124,7 +126,6 @@ let g:user_emmet_mode = 'n'
 " autocmd FileType html,javascript,less EmmetInstall
 
 " Completion & Snippet config
-let g:ycm_python_binary_path = '/usr/local/bin/python3'
 let g:ycm_key_list_select_completion = ['<C-n>', '<Tab>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<S-Tab>']
 let g:SuperTabDefaultCompletionType = ['<Tab>']

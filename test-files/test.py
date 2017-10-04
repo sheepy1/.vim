@@ -1,3 +1,4 @@
+from array import *
 def hello(world):
     """hahah
 
@@ -9,3 +10,6 @@ def hello(world):
 
 def hello(world):
     return 'hello world'
+
+def hello_world():
+    arr = array('i', [1, 2, 3])

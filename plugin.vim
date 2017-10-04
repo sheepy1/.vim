@@ -3,7 +3,11 @@
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
-" Make sure you use single quotes
+" Search via Google
+Plug 'szw/vim-g'
+
+" Translate via Youdao API
+Plug 'ianva/vim-youdao-translater'
 
 " Auto select keyboard(switch to en when turn to normal mode)
 Plug 'ybian/smartim'
@@ -91,6 +95,14 @@ Plug 'scrooloose/nerdtree' " , { 'on':  'NERDTreeToggle' }
 " Initialize plugin system
 call plug#end()
 
+" Google config
+let g:vim_g_query_url = "http://google.com/search?q="
+
+" Youdao config
+vnoremap <silent> <C-T> :<C-u>Ydv<CR>
+nnoremap <silent> <C-T> :<C-u>Ydc<CR>
+nnoremap gyd :Yde<CR>
+
 " JSX in .js
 let g:jsx_ext_required = 0
 
@@ -112,6 +124,7 @@ let g:user_emmet_mode = 'n'
 " autocmd FileType html,javascript,less EmmetInstall
 
 " Completion & Snippet config
+let g:ycm_python_binary_path = '/usr/local/bin/python3'
 let g:ycm_key_list_select_completion = ['<C-n>', '<Tab>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<S-Tab>']
 let g:SuperTabDefaultCompletionType = ['<Tab>']

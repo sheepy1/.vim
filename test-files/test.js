@@ -10,9 +10,6 @@ class Test {
     }
 }
 
-let tst = new Test();
-tst.run();
-
 function snippetFunc()'` {
     console.log('hello');
 }

@@ -6,11 +6,12 @@
         <div class="hello">{{ hello }}</div>
         <div class="hello"></div>
         <img src="">
-
     </div>
 </template>
 <script>
-    import heh from 'heheh';
+import heh from 'heheh';
+import Hello from './test.js';
+
 export default{
     data() {
         return {
@@ -56,8 +57,6 @@ export default{
     export default {
         data() {
             return {
-                `pre${mid}pos`
-                `pre${mid}pos`
             };
         },
 
@@ -73,4 +72,3 @@ export default{
 <style lang="less" scoped>
 
 </style>
-

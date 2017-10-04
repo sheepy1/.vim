@@ -134,7 +134,12 @@ endfunction
 vnoremap gd y:/<C-R>"<CR>
 vnoremap gs y:Ack! <C-R>"<CR>
 
-command Config find ~/.vim " config vim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => config vim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+command ConfigGeneral vsp ~/.vim/general.vim
+command ConfigPlugin vsp ~/.vim/plugin.vim
+command ConfigUI vsp ~/.vim/user-interface.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo

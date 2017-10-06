@@ -1,27 +1,25 @@
 <template>
-    <div>
-        <div class="hello">
-            {{ hello }}
+    <div id="root">
+        <div class="title-container">
+            <div class="title"></div>
+            <div class="subtitle"></div>
         </div>
-        <div class="hello">{{ hello }}</div>
-        <div class="hello"></div>
-        <img src="">
     </div>
 </template>
-<script>
-import heh from 'heheh';
-import Hello from './test.js';
 
-export default{
-    data() {
-        return {
-            key: value,
-            key2: value
-        };
+<script>
+export default {
+    created() {
+
     },
+
+    mounted() {
+
+    },
+
     data() {
         return {
-            person: { name: 'Sheepy' }
+
         };
     },
 
@@ -30,45 +28,22 @@ export default{
     },
 
     methods: {
-        personName() {
-            return this.person.name;
-        },
-        fetch() {
-            return this.get();
+        killTime() {
+            console.log('kill time');
         }
+    },
+
+    components: {
 
     }
-
 };
 </script>
 
 <style lang="less" scoped>
-    .hello {
-        width: 32px;
-        height: 66px;
-    }
-</style>
-
-<template>
-    <div id="root">
-    </div>
-</template>
-<script>
-    export default {
-        data() {
-            return {
-            };
-        },
-
-        computed: {
-            hello() {
-                return 'world';
-            }
-        }
-
-    };
-</script>
-
-<style lang="less" scoped>
-
+.root {
+    height: 30px;
+    width: 40px;
+    display: flex;
+    justify-content: space-around;
+}
 </style>

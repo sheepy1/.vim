@@ -37,10 +37,12 @@ Plug 'honza/vim-snippets'
 Plug 'tomtom/tcomment_vim'
 
 " Completion
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
+Plug 'Shougo/neocomplete.vim'
 
 " Color Scheme
-Plug 'altercation/vim-colors-solarized'
+" Plug 'altercation/vim-colors-solarized'
+Plug 'colepeters/spacemacs-theme.vim'
 
 " Translate(Has some problems, maybe I could write one by myself.)
 " Plug 'https://github.com/vim-scripts/TranslateEnToCn'
@@ -54,11 +56,17 @@ Plug 'tpope/vim-surround'
 " Light line
 Plug 'itchyny/lightline.vim'
 
+" Vue highlight
+" Plug 'posva/vim-vue'
+
 " Solve the css's indent problem in html file
 Plug 'othree/html5.vim'
 
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+
+" Tern-based JavaScript editing support: go def, show doc, show refs, rename
+Plug 'ternjs/tern_for_vim'
 
 " Indent file with .editorconfig
 " Plug 'maksimr/vim-jsbeautify'
@@ -95,15 +103,18 @@ Plug 'scrooloose/nerdtree' " , { 'on':  'NERDTreeToggle' }
 " Initialize plugin system
 call plug#end()
 
+" Vue config
+" let g:vue_disable_pre_processors=1
+
 " Google config
 " Use :Google in v/n mode
 " Use :Googlef to search with file type
 " let g:vim_g_query_url = "http://google.com/search?q="
 
 " Youdao config
-vnoremap <silent> <C-T> :<C-u>Ydv<CR>
-nnoremap <silent> <C-T> :<C-u>Ydc<CR>
-nnoremap gyd :Yde<CR>
+vnoremap <silent> gy :<C-u>Ydv<CR>
+nnoremap <silent> gy :<C-u>Ydc<CR>
+nnoremap <silent> gyd :Yde<CR>
 
 " JSX in .js
 let g:jsx_ext_required = 0
@@ -117,7 +128,7 @@ nnoremap gs yiw:Ack! <C-R>"<Cr>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-map <C-n> :NERDTreeToggle<CR>
+nmap <C-n> :NERDTreeToggle<CR>
 
 " Emmet config
 let g:user_emmet_leader_key = ','
@@ -126,13 +137,90 @@ let g:user_emmet_mode = 'n'
 " autocmd FileType html,javascript,less EmmetInstall
 
 " Completion & Snippet config
-let g:ycm_key_list_select_completion = ['<C-n>', '<Tab>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<S-Tab>']
-let g:SuperTabDefaultCompletionType = ['<Tab>']
-" let g:ycm_autoclose_preview_window_after_insertion = 1
+"Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
+
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+" Enable omni completion.
+autocmd FileType css,less setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+" let g:ycm_key_list_select_completion = ['<C-n>', '<Tab>']
+" let g:ycm_key_list_previous_completion = ['<C-p>', '<S-Tab>']
+" let g:SuperTabDefaultCompletionType = ['<Tab>']
+" " let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:UltiSnipsExpandTrigger = '<C-j>'
 let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+" " javascript and css conflict in vue file, so I remove the configuration of javascript.
+" let g:ycm_semantic_triggers = {
+"     \   'css,less,html,vue': ['re!^\s+', 're!:\s+'],
+"     \   'python': ['re!\s+', '.'],
+"     \   'ruby': ['re!\s+', '.', '::']
+"     \ }
 
 " CtrlP config
 let g:ctrlp_map = '<leader>o'
@@ -152,6 +240,7 @@ set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 
-" Completion
-" set omnifunc=syntaxcomplete#Complete
-
+" lightline
+let g:lightline = {
+      \ 'colorscheme': 'Dracula',
+      \ }

@@ -84,20 +84,25 @@ syntax enable
  set t_Co=256
  " endif
 
-colorscheme solarized
+if (has("termguicolors"))
+  set termguicolors
+endif
+colorscheme spacemacs-theme
+" colorscheme solarized
 " 16 || 256
-let g:solarized_termcolors = 256
+" let g:solarized_termcolors = 256
 
 " for solarized, dark and light is totally different.
 set background=dark
 
 " Set extra options when running in GUI mode
-if has("gui_running")
-    set guioptions-=T
-    set guioptions-=e
-    set t_Co=256
-    set guitablabel=%M\ %t
-endif
+set guioptions= " remove scroll bar in macvim
+" if has("gui_running")
+"     set guioptions-=T
+"     set guioptions-=e
+"     set t_Co=256
+"     set guitablabel=%M\ %t
+" endif
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8

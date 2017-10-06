@@ -21,7 +21,7 @@ set relativenumber
 set number
 
 " Treat vue file as html/javascript/less file
-autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css.less
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html
 
 " Indent before saving
 " autocmd BufWritePre * :normal gg=G
@@ -43,6 +43,7 @@ let g:mapleader = " "
 
 " Fast saving
 nmap <leader>w :w!<cr>
+nmap <leader>fs :w!<cr>
 
 " Fast quit
 nmap <leader>q :q!<cr>
@@ -57,6 +58,8 @@ command W w !sudo tee % > /dev/null
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Insert mode mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+inoremap <C-l> i<C-x><C-o>
+
 inoremap ( ()<Esc>i
 " inoremap (<CR> (<CR>)<Esc>ko<Tab>
 " inoremap (<Esc> (<Esc>
@@ -214,38 +217,49 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
+map <silent> <leader>sc :noh<cr>
 
 " Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
+" map <C-j> <C-W>j
+" map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+" learn from spacemacs
+" map <leader>wj <C-w>j
+" map <leader>wk <C-w>k
+" map <leader>wh <C-w>h
+" map <leader>wl <C-w>l
 
 " Close the current buffer
-map <leader>bd :Bclose<cr>:tabclose<cr>gT
+" map <leader>bd :Bclose<cr>:tabclose<cr>gT
 
 " Close all the buffers
-map <leader>ba :bufdo bd<cr>
+" map <leader>ba :bufdo bd<cr>
 
-map <leader>l :bnext<cr>
-map <leader>h :bprevious<cr>
+" switch buffer
+" <C-i>
+nmap <C-l> :bnext<cr>
+" <C-o>
+nmap <C-h> :bprevious<cr>
 
 " Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
-map <leader>t<leader> :tabnext
+nmap <C-j> :tabprevious<cr>
+nmap <C-k> :tabnext<cr>
+nmap <C-t> :tabnew<cr>
+" map <leader>to :tabonly<cr>
+" map <leader>tc :tabclose<cr>
+" map <leader>tm :tabmove
+" map <leader>t<leader> :tabnext
 
 " Let 'tl' toggle between this and the last accessed tab
-let g:lasttab = 1
-nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
-au TabLeave * let g:lasttab = tabpagenr()
+" let g:lasttab = 1
+" nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+" au TabLeave * let g:lasttab = tabpagenr()
 
 
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+nmap <C-t>n :tabedit <c-r>=expand("%:p:h")<cr>/
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
@@ -283,12 +297,12 @@ nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
-if has("mac") || has("macunix")
-    nmap <D-j> <M-j>
-    nmap <D-k> <M-k>
-    vmap <D-j> <M-j>
-    vmap <D-k> <M-k>
-endif
+" if has("mac") || has("macunix")
+"     nmap <D-j> <M-j>
+"     nmap <D-k> <M-k>
+"     vmap <D-j> <M-j>
+"     vmap <D-k> <M-k>
+" endif
 
 " Delete trailing white space on save, useful for some filetypes ;)
 fun! CleanExtraSpaces()

@@ -22,6 +22,7 @@ set number
 
 " Treat vue file as html/javascript/less file
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html
+autocmd BufRead,BufNewFile *.less setlocal filetype=less.css
 
 " Indent before saving
 " autocmd BufWritePre * :normal gg=G
@@ -116,7 +117,6 @@ vnoremap ` <Esc>`>a`<Esc>`<i`<Esc>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Open markdown files with Chrome.
 autocmd BufEnter *.md exe 'nnoremap <leader>r :!open -a "MacDown.app" "%"<CR><CR>'
-
 
 autocmd BufEnter *.html exe 'nnoremap <leader>r :!open "%"<CR><CR>'
 
@@ -220,10 +220,10 @@ map <silent> <leader><cr> :noh<cr>
 map <silent> <leader>sc :noh<cr>
 
 " Smart way to move between windows
-" map <C-j> <C-W>j
-" map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+nmap <C-j> <C-W>j
+nmap <C-k> <C-W>k
+nmap <C-h> <C-W>h
+nmap <C-l> <C-W>l
 " learn from spacemacs
 " map <leader>wj <C-w>j
 " map <leader>wk <C-w>k
@@ -237,15 +237,13 @@ map <C-l> <C-W>l
 " map <leader>ba :bufdo bd<cr>
 
 " switch buffer
-" <C-i>
-nmap <C-l> :bnext<cr>
-" <C-o>
-nmap <C-h> :bprevious<cr>
+nmap L :bnext<cr>
+nmap H :bprevious<cr>
 
 " Useful mappings for managing tabs
-nmap <C-j> :tabprevious<cr>
-nmap <C-k> :tabnext<cr>
-nmap <C-t> :tabnew<cr>
+nmap J :tabprevious<cr>
+nmap K :tabnext<cr>
+nmap t :tabnew<cr>
 " map <leader>to :tabonly<cr>
 " map <leader>tc :tabclose<cr>
 " map <leader>tm :tabmove
@@ -259,7 +257,7 @@ nmap <C-t> :tabnew<cr>
 
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
-nmap <C-t>n :tabedit <c-r>=expand("%:p:h")<cr>/
+nmap tn :tabedit <c-r>=expand("%:p:h")<cr>/
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>

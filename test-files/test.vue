@@ -13,7 +13,7 @@ export default {
 
     },
 
-    mounted() {
+   mounted() {
 
     },
 

@@ -43,11 +43,12 @@ let mapleader = " "
 let g:mapleader = " "
 
 " Fast saving
-nmap <leader>w :w!<cr>
+" nmap <leader>w :w!<cr>
 nmap <leader>fs :w!<cr>
 
 " Fast quit
 nmap <leader>q :q!<cr>
+nmap <leader>wd :q!<cr>
 
 " Save and quit
 nmap <leader>x :x!<cr>
@@ -225,13 +226,13 @@ nmap <C-k> <C-W>k
 nmap <C-h> <C-W>h
 nmap <C-l> <C-W>l
 " learn from spacemacs
-" map <leader>wj <C-w>j
-" map <leader>wk <C-w>k
-" map <leader>wh <C-w>h
-" map <leader>wl <C-w>l
+nmap <leader>wj <C-w>j
+nmap <leader>wk <C-w>k
+nmap <leader>wh <C-w>h
+nmap <leader>wl <C-w>l
 
 " Close the current buffer
-" map <leader>bd :Bclose<cr>:tabclose<cr>gT
+nmap <leader>bd :Bclose<cr>:tabclose<cr>gT
 
 " Close all the buffers
 " map <leader>ba :bufdo bd<cr>

@@ -45,5 +45,7 @@ export default {
     width: 40px;
     display: flex;
     justify-content: space-around;
+    display: flex;
+    align-items: center;
 }
 </style>

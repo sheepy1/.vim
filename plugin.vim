@@ -112,9 +112,9 @@ call plug#end()
 " let g:vim_g_query_url = "http://google.com/search?q="
 
 " Youdao config
-vnoremap <silent> gy :<C-u>Ydv<CR>
-nnoremap <silent> gy :<C-u>Ydc<CR>
-nnoremap <silent> gyd :Yde<CR>
+vnoremap <silent> <leader>y :<C-u>Ydv<CR>
+nnoremap <silent> <leader>y :<C-u>Ydc<CR>
+nnoremap <silent> <leader>yd :Yde<CR>
 
 " JSX in .js
 let g:jsx_ext_required = 0
@@ -127,8 +127,7 @@ nnoremap gs yiw:Ack! <C-R>"<Cr>
 " NERDTree config
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-nmap <C-n> :NERDTreeToggle<CR>
+nmap <leader>ft :NERDTreeToggle<CR>
 
 " Emmet config
 let g:user_emmet_leader_key = ','

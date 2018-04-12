@@ -49,3 +49,44 @@ export default {
     align-items: center;
 }
 </style>
+
+<template>
+    <div id="root">
+
+    </div>
+</template>
+
+<script>
+
+export default {
+    created() {
+
+    },
+
+    mounted() {
+
+    },
+
+    data() {
+        return {
+
+        };
+    },
+
+    computed: {
+
+    },
+
+    methods: {
+
+    },
+
+    components: {
+
+    }
+};
+</script>
+
+<style lang="less" scoped>
+
+</style>

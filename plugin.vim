@@ -66,6 +66,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 
 " Tern-based JavaScript editing support: go def, show doc, show refs, rename
+" NOTE: brew install macvim --with-lua, no!!! --with-cscope
 Plug 'ternjs/tern_for_vim'
 
 " Indent file with .editorconfig

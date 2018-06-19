@@ -22,6 +22,7 @@ set number
 
 " Treat vue file as html/javascript/less file
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html
+autocmd BufRead,BufNewFile *.ts setlocal filetype=javascript.typescript
 autocmd BufRead,BufNewFile *.less setlocal filetype=less.css
 
 " Indent before saving

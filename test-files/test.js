@@ -13,3 +13,11 @@ class Test {
 function snippetFunc() {
     console.log('hello');
 }
+
+const object = {
+    a: 1,
+    b() {
+        console.log('b');
+    }
+}
+

@@ -10,7 +10,8 @@ Plug 'szw/vim-g'
 Plug 'ianva/vim-youdao-translater'
 
 " Auto select keyboard(switch to en when turn to normal mode)
-Plug 'ybian/smartim'
+" Plug 'hiberabyss/smartim'
+" Plug 'CodeFalling/fcitx-vim-osx'
 
 " Syntastic(It looks like unnessary for fe, because we have eslint.)
 Plug 'vim-syntastic/syntastic'
@@ -111,6 +112,14 @@ call plug#end()
 " Use :Google in v/n mode
 " Use :Googlef to search with file type
 " let g:vim_g_query_url = "http://google.com/search?q="
+vnoremap  <leader>g :Google<CR>
+vnoremap  <leader>gf :Googlef<CR>
+nnoremap  <leader>g :Google<CR>
+nnoremap  <leader>gf :Googlef<CR>
+
+" smartim
+" let g:smartim_default='com.sogou.inputmethod.sogou.pinyin'
+" let g:smartim_debug=1
 
 " Youdao config
 vnoremap <silent> <leader>y :<C-u>Ydv<CR>

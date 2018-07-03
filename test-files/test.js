@@ -20,4 +20,3 @@ const object = {
         console.log('b');
     }
 }
-

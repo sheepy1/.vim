@@ -17,6 +17,9 @@ Plug 'ianva/vim-youdao-translater'
 Plug 'vim-syntastic/syntastic'
 Plug 'mtscout6/syntastic-local-eslint.vim'
 
+" Scheme
+Plug 'wlangstroth/vim-racket'
+
 " ghc-mode
 Plug 'eagletmt/ghcmod-vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -44,6 +47,7 @@ Plug 'Shougo/neocomplete.vim'
 " Color Scheme
 " Plug 'altercation/vim-colors-solarized'
 Plug 'colepeters/spacemacs-theme.vim'
+Plug 'altercation/vim-colors-solarized'
 
 " Translate(Has some problems, maybe I could write one by myself.)
 " Plug 'https://github.com/vim-scripts/TranslateEnToCn'
@@ -65,6 +69,7 @@ Plug 'othree/html5.vim'
 
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+Plug 'leafgarland/typescript-vim'
 
 " Tern-based JavaScript editing support: go def, show doc, show refs, rename
 " NOTE: brew install macvim --with-lua, no!!! --with-cscope
@@ -86,6 +91,12 @@ Plug 'ternjs/tern_for_vim'
 " On-demand loading
 Plug 'scrooloose/nerdtree' " , { 'on':  'NERDTreeToggle' }
 " Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+
+" Bookkeeping
+Plug 'nathangrigg/vim-beancount'
+
+" Editorconfig
+Plug 'editorconfig/editorconfig-vim'
 
 " Using a non-master branch
 " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' } " Generate config file for YCM
@@ -232,6 +243,7 @@ let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 "     \ }
 
 " CtrlP config
+" nmap <leader>o :CtrlPMRU<CR>
 let g:ctrlp_map = '<leader>o'
 " When invoked without an explicit starting directory, CtrlP will set its local working directory according to this variable
 " 'r' - the nearest ancestor of the current file that contains one of these directories or files: .git .hg .svn .bzr _darcs
@@ -253,3 +265,16 @@ let g:syntastic_auto_loc_list = 1
 let g:lightline = {
       \ 'colorscheme': 'Dracula',
       \ }
+" let g:lightline = {
+"       \ 'colorscheme': 'solarized',
+"       \ }
+
+" vim-beancount
+" let b:beancount_root = '~/life/bookkeeping'
+autocmd FileType beancount inoremap . .<C-O>:AlignCommodity<CR>
+" autocmd FileType beancount inoremap <Tab> <c-x><c-o>
+
+" Tern
+nnoremap <silent> <leader>d :TernDef<CR>
+nnoremap <silent> <leader>t :TernDefTab<CR>
+nnoremap <silent> <leader>c :TernDoc<CR>

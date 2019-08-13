@@ -22,8 +22,10 @@ set number
 
 " Treat vue file as html/javascript/less file
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html
-autocmd BufRead,BufNewFile *.ts setlocal filetype=javascript.typescript
+autocmd BufRead,BufNewFile *.axml setlocal filetype=xml.html
+" autocmd BufRead,BufNewFile *.ts setlocal filetype=javascript.typescript
 autocmd BufRead,BufNewFile *.less setlocal filetype=less.css
+autocmd BufRead,BufNewFile *.acss setlocal filetype=css
 
 " Indent before saving
 " autocmd BufWritePre * :normal gg=G
@@ -46,6 +48,9 @@ let g:mapleader = " "
 " Fast saving
 nmap <leader>w :w!<cr>
 nmap <leader>fs :w!<cr>
+
+" Use Y to work from the cursor to the end of line
+nmap Y y$
 
 " Fast quit
 nmap <leader>q :q!<cr>
@@ -100,12 +105,12 @@ cnoremap <C-k> <Esc>:
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Parenthesis/bracket
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <leader>( ea)<Esc>bi(<Esc>
-nnoremap <leader>[ ea]<Esc>bi[<Esc>
-nnoremap <leader>{ ea}<Esc>bi{<Esc>
-nnoremap <leader>" ea"<Esc>bi"<Esc>
-nnoremap <leader>' ea'<Esc>bi'<Esc>
-nnoremap <leader>` ea`<Esc>bi`<Esc>
+nnoremap <leader>( bi(<Esc>ea)<Esc>
+nnoremap <leader>[ bi[<Esc>ea]<Esc>
+nnoremap <leader>{ bi{<Esc>ea}<Esc>
+nnoremap <leader>" bi"<Esc>ea"<Esc>
+nnoremap <leader>' bi'<Esc>ea'<Esc>
+nnoremap <leader>` bi`<Esc>ea`<Esc>
 
 vnoremap ( <Esc>`>a)<Esc>`<i(<Esc>
 vnoremap [ <Esc>`>a]<Esc>`<i[<Esc>
@@ -131,6 +136,16 @@ endfunction
 au BufEnter *.js exe 'nnoremap <leader>r :call RunJavaScript()<cr>'
 function RunJavaScript()
     :w! | !node "%"
+endfunction
+
+au BufEnter *.bean exe 'nnoremap <leader>r :call RunBeanCount()<cr>'
+function RunBeanCount()
+    :w! | !bean-report "%" balances
+endfunction
+
+au BufEnter *.rkt exe 'nnoremap <leader>r :call RunRacket()<cr>'
+function RunRacket()
+    :w! | !racket "%"
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -188,9 +203,9 @@ set expandtab
 " Be smart when using tabs ;)
 set smarttab
 
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
+" 1 tab == 2 spaces
+set shiftwidth=2
+set tabstop=2
 
 " Linebreak on 500 characters
 set lbr
@@ -248,9 +263,9 @@ nmap H <C-o>
 " Useful mappings for managing tabs
 nmap J :tabprevious<cr>
 nmap K :tabnext<cr>
-nmap t :tabnew<cr>
+" nmap t :tabnew<cr>
 " map <leader>to :tabonly<cr>
-" map <leader>tc :tabclose<cr>
+" map < eader>tc :tabclose<cr>
 " map <leader>tm :tabmove
 " map <leader>t<leader> :tabnext
 

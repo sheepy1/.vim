@@ -20,3 +20,8 @@ const object = {
         console.log('b');
     }
 }
+
+const hello = 'hello'
+const a = `hahaha\`${hello}\``
+
+
